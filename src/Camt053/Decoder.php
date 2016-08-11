@@ -121,14 +121,16 @@ class Decoder implements DecoderInterface
             $currency = (string)$entryXml->Amt['Ccy'];
             $bookingDate = (string)$entryXml->BookgDt->Dt;
             $valueDate = (string)$entryXml->ValDt->Dt;
+            $cdtDbtInd = (string) $entryXml->CdtDbtInd;
 
-            if ((string) $entryXml->CdtDbtInd === 'DBIT') {
+            if ($cdtDbtInd === 'DBIT') {
                 $amount = $amount * -1;
             }
 
             $entry = new Entry(
                 $statement,
                 $index,
+                $cdtDbtInd,
                 new Money($amount, new Currency($currency)),
                 new DateTimeImmutable($bookingDate),
                 new DateTimeImmutable($valueDate)
