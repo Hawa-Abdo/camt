@@ -47,6 +47,10 @@ class Entry
      * @var int
      */
     private $index;
+        /**
+     * @var string
+     */
+    private $cdtDbtInd;
     /**
      * @var string
      */
@@ -59,13 +63,14 @@ class Entry
      * @param DateTimeImmutable $bookingDate
      * @param DateTimeImmutable $valueDate
      */
-    public function __construct(Statement $statement, $index, Money $amount, DateTimeImmutable $bookingDate, DateTimeImmutable $valueDate)
+    public function __construct(Statement $statement, $index, $cdtDbtInd, Money $amount, DateTimeImmutable $bookingDate, DateTimeImmutable $valueDate)
     {
         $this->statement = $statement;
         $this->index = $index;
         $this->amount = $amount;
         $this->bookingDate = $bookingDate;
         $this->valueDate = $valueDate;
+        $this->cdtDbtInd = $cdtDbtInd;
     }
 
     /**
@@ -199,5 +204,21 @@ class Entry
     public function getBatchPaymentId()
     {
         return $this->batchPaymentId;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCdtDbtInd()
+    {
+        return $this->cdtDbtInd;
+    }
+
+    /**
+     * @param string $cdtDbtInd
+     */
+    public function setCdtDbtInd($cdtDbtInd)
+    {
+        $this->cdtDbtInd = $cdtDbtInd;
     }
 }
